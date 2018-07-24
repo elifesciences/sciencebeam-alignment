@@ -1,6 +1,6 @@
 FROM python:2.7.14-stretch
-ENV PROJECT_HOME=/srv/sciencebeam-alignment
 
+ENV PROJECT_HOME=/srv/sciencebeam-alignment
 WORKDIR ${PROJECT_HOME}
 
 ENV VENV=${PROJECT_HOME}/venv
