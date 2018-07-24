@@ -1,6 +1,7 @@
-from sciencebeam_alignment.WordSequenceMatcher import (
+from sciencebeam_alignment.word_sequence_matcher import (
     WordSequenceMatcher
 )
+
 
 WORD_1 = 'word1'
 WORD_2 = 'word2'
@@ -11,7 +12,7 @@ class TestWordSequenceMatcher(object):
     def test_should_not_match_different_words(self):
         sm = WordSequenceMatcher(None, WORD_1, WORD_2)
         matching_blocks = sm.get_matching_blocks()
-        assert len(matching_blocks) == 0
+        assert not matching_blocks
 
     def test_should_match_same_words_standalone(self):
         sm = WordSequenceMatcher(None, WORD_1, WORD_1)

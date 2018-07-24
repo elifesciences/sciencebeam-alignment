@@ -45,13 +45,14 @@ def _is_array_of_type(a, dtype):
     return np.issubdtype(a.dtype, dtype)
 
 
+# pylint: disable=too-many-arguments
 def compute_inner_alignment_matrix_simple_scoring_py(
         scoring_matrix, a, b, match_score, mismatch_score, gap_score, min_score):
     """Pure python fallback implementation.
-    
+
     Calculates the inner alignment matrix for a and b using simple scoring parameters:
     match_score, mismatch_score, gap_score, min_score
-    
+
     Arguments:
       scoring_matrix {matrix} -- Output matrix (1 + len(a), 1 + len(b))
       a {sequence} -- First sequence (string or list)
@@ -87,7 +88,7 @@ def compute_inner_alignment_matrix_scoring_fn_py(
 
     Same as compute_inner_alignment_matrix_simple_scoring_py but uses a function
     to calculate match / mismatch (may be slower but more flexible).
-    
+
     Arguments:
       scoring_matrix {matrix} -- Output matrix (1 + len(a), 1 + len(b))
       a {sequence} -- First sequence (string or list)
@@ -198,12 +199,12 @@ def alignment_matrix_traceback_py(score_matrix, start_locs, is_local):
         LinkedListNode(tuple(loc))
         for loc in start_locs
     ])
-    while len(pending_roots) > 0:
+    while pending_roots:
         n = pending_roots.pop()
         i, j = n.data
         next_locs = _next_locs(score_matrix, i, j, is_local)
         get_logger().debug('next_locs: %s', next_locs)
-        if len(next_locs) == 0:
+        if not next_locs:
             yield n
         else:
             pending_roots.extend([
@@ -248,8 +249,7 @@ class LinkedListNode(object):
     def __str__(self):
         if self.next_node is not None:
             return str(self.data) + ' -> ' + str(self.next_node)
-        else:
-            return str(self.data)
+        return str(self.data)
 
     def __iter__(self):
         yield self.data

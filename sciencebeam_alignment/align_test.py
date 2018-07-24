@@ -88,7 +88,7 @@ class AbstractTestCommonSequenceMatcher(object, with_metaclass(ABCMeta)):
             assert _non_zero(sm.get_matching_blocks()) == [(0, 0, 1)]
 
 
-class AbstractTestLocalSequenceMatcher(AbstractTestCommonSequenceMatcher):
+class AbstractTestLocalSequenceMatcher(AbstractTestCommonSequenceMatcher): # pylint: disable=abstract-method
     def _matcher(self, a, b, scoring=None):
         return LocalSequenceMatcher(
             a=self._convert(a),
@@ -141,7 +141,7 @@ class TestLocalSequenceMatcherWithNumpyInt32ArrayWithoutNative(
             yield
 
 
-class AbstractTestGlobalSequenceMatcher(AbstractTestCommonSequenceMatcher):
+class AbstractTestGlobalSequenceMatcher(AbstractTestCommonSequenceMatcher): # pylint: disable=abstract-method
     def _matcher(self, a, b, scoring=None):
         with require_native(False):
             return GlobalSequenceMatcher(

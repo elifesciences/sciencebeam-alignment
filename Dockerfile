@@ -11,7 +11,7 @@ COPY requirements.txt ${PROJECT_HOME}/
 RUN pip install -r requirements.txt
 
 COPY sciencebeam_alignment ${PROJECT_HOME}/sciencebeam_alignment
-COPY *.conf *.sh *.in *.txt *.py ${PROJECT_HOME}/
+COPY *.conf *.sh *.in *.txt *.py .pylintrc ${PROJECT_HOME}/
 
 RUN python setup.py build_ext --inplace
 
