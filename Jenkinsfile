@@ -32,7 +32,7 @@ elifeLibrary {
             stage 'Push release', {
                 isNew = sh(script: "git tag | grep v${candidateVersion}", returnStatus: true) != 0
                 if (isNew) {
-                    candidateVersion = dockerComposeRun(
+                    dockerComposeRun(
                         "sciencebeam-alignment",
                         "twine upload dist/*",
                         commit
