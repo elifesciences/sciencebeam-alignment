@@ -12,38 +12,31 @@ elifeLibrary {
         stage 'Build images', {
             checkout scm
             dockerComposeBuild(commit)
-            try {
-                candidateVersion = sh(
-                    script: (
-                        "IMAGE_TAG=${commit} " +
-                        "docker-compose -f docker-compose.yml -f docker-compose.ci.yml run " +
-                        "sciencebeam-alignment ./print_version.sh"
-                    ),
-                    returnStdout: true
-                ).trim()
-                echo "Candidate version: v${candidateVersion}"
-            } finally {
-                sh 'docker-compose down -v'
-            }
+            candidateVersion = dockerComposeRun(
+                "sciencebeam-alignment",
+                "./print_version.sh",
+                commit
+            ).trim()
+            echo "Candidate version: v${candidateVersion}"
         }
 
         stage 'Project tests', {
-            try {
-                sh "IMAGE_TAG=${commit} " +
-                    "docker-compose -f docker-compose.yml -f docker-compose.ci.yml " +
-                    "run sciencebeam-alignment ./project_tests.sh"
-            } finally {
-                sh 'docker-compose down -v'
-            }
+            candidateVersion = dockerComposeRun(
+                "sciencebeam-alignment",
+                "./project_tests.sh",
+                commit
+            )
         }
 
         elifeMainlineOnly {
             stage 'Push release', {
                 isNew = sh(script: "git tag | grep v${candidateVersion}", returnStatus: true) != 0
                 if (isNew) {
-                    sh "IMAGE_TAG=${commit} " +
-                        "docker-compose -f docker-compose.yml -f docker-compose.ci.yml run " +
-                        "sciencebeam-alignment twine upload dist/*"
+                    candidateVersion = dockerComposeRun(
+                        "sciencebeam-alignment",
+                        "twine upload dist/*",
+                        commit
+                    )
                 }
             }
         }
