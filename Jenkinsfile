@@ -21,7 +21,7 @@ elifeLibrary {
         }
 
         stage 'Project tests', {
-            candidateVersion = dockerComposeRun(
+            dockerComposeRun(
                 "sciencebeam-alignment",
                 "./project_tests.sh",
                 commit
