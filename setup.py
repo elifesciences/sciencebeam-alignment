@@ -1,6 +1,6 @@
-from setuptools import find_packages, setup, Extension
+from __future__ import print_function
 
-import numpy as np
+from setuptools import find_packages, setup, Extension
 
 import sciencebeam_alignment
 
@@ -8,7 +8,27 @@ import sciencebeam_alignment
 with open('requirements.txt', 'r') as f:
     REQUIRED_PACKAGES = f.readlines()
 
+NUMPY_REQUIREMENT = [r.rstrip() for r in REQUIRED_PACKAGES if r.startswith('numpy')][0]
+
+
+def install_numpy_if_not_available():
+    try:
+        import numpy # pylint: disable=unused-variable
+    except ImportError:
+        import subprocess
+        print('installing numpy:', NUMPY_REQUIREMENT)
+        subprocess.check_output(['pip', 'install', NUMPY_REQUIREMENT])
+
+
+def get_numpy_include_dir():
+    install_numpy_if_not_available()
+
+    import numpy as np
+    return np.get_include()
+
+
 packages = find_packages()
+
 
 setup(
     name='sciencebeam_alignment',
@@ -20,13 +40,13 @@ setup(
     setup_requires=[
         # Setuptools 18.0 properly handles Cython extensions.
         'setuptools>=18.0',
-        'cython',
+        'cython'
     ],
     ext_modules=[
         Extension(
             'sciencebeam_alignment.align_fast_utils',
-            sources=['sciencebeam_alignment/align_fast_utils.pyx'],
+            sources=['sciencebeam_alignment/align_fast_utils.pyx']
         ),
     ],
-    include_dirs=[np.get_include()],
+    include_dirs=[get_numpy_include_dir()]
 )
