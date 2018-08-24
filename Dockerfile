@@ -18,4 +18,4 @@ RUN python setup.py build_ext --inplace
 COPY requirements.dev.txt ${PROJECT_HOME}/
 RUN pip install -r requirements.dev.txt
 
-RUN python setup.py sdist bdist_wheel
+RUN python setup.py sdist
