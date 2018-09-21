@@ -12,7 +12,7 @@ elifeLibrary {
         stage 'Build images', {
             checkout scm
             dockerComposeBuild(commit)
-            candidateVersion = dockerComposeRun(
+            candidateVersion = dockerComposeRunAndCaptureOutput(
                 "sciencebeam-alignment",
                 "./print_version.sh",
                 commit
