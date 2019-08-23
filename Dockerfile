@@ -23,7 +23,7 @@ COPY README.md MANIFEST.in setup.py ./
 RUN python setup.py build_ext --inplace
 
 COPY tests ./tests
-COPY .pylintrc ./
+COPY .flake8 .pylintrc ./
 
 ARG version
 ADD docker ./docker
