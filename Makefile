@@ -128,4 +128,4 @@ ci-push-pypi:
 
 
 ci-verify-version:
-	$(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment print_version.sh
+	$(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./print_version.sh
