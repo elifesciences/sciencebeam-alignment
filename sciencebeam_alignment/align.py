@@ -1,4 +1,5 @@
 import logging
+import warnings
 from collections import deque
 from itertools import islice
 from abc import ABCMeta, abstractmethod
@@ -20,8 +21,8 @@ try:
         native_alignment_matrix_single_path_traceback
     )
     native_enabled = True
-except ImportError:
-    logging.getLogger(__name__).warning('fast implementation not available')
+except ImportError as e:
+    warnings.warn('fast implementation not available due to: %s' % e)
     native_enabled = False
 
 
