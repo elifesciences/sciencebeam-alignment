@@ -37,7 +37,7 @@ dev-venv: venv-create dev-install
 
 
 dev-pylint:
-	$(PYTHON) -m pylint sciencebeam_alignment setup.py
+	$(PYTHON) -m pylint sciencebeam_alignment tests setup.py
 
 
 dev-lint: dev-pylint
@@ -67,7 +67,7 @@ shell-dev:
 
 
 pylint:
-	$(DEV_RUN) pylint sciencebeam_alignment setup.py
+	$(DEV_RUN) pylint sciencebeam_alignment tests setup.py
 
 
 pytest:

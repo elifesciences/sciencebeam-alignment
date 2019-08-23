@@ -4,4 +4,6 @@ services:
     sciencebeam-alignment:
         build:
             context: .
+            args:
+                install_dev: y
         image: elifesciences/sciencebeam-utils:${IMAGE_TAG}

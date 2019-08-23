@@ -7,13 +7,19 @@ ENV VENV=${PROJECT_HOME}/venv
 RUN virtualenv ${VENV}}
 ENV PYTHONUSERBASE=${VENV} PATH=${VENV}/bin:$PATH
 
-COPY sciencebeam_alignment ${PROJECT_HOME}/sciencebeam_alignment
-COPY *.conf *.sh *.in *.txt *.py .pylintrc ${PROJECT_HOME}/
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+ARG install_dev
+COPY requirements.dev.txt ./
+RUN if [ "${install_dev}" = "y" ]; then pip install -r requirements.dev.txt; fi
+
+COPY sciencebeam_alignment ./sciencebeam_alignment
+COPY MANIFEST.in setup.py .pylintrc ./
 
 RUN python setup.py build_ext --inplace
 
 RUN python setup.py sdist
 
-COPY requirements.dev.txt ${PROJECT_HOME}/
-RUN pip install -r requirements.dev.txt
-
+COPY tests ./tests
+COPY .pylintrc ./
