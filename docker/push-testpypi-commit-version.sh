@@ -22,6 +22,6 @@ $(dirname $0)/set-version.sh "${version}"
 
 cat sciencebeam_alignment/__init__.py
 
-python setup.py sdist bdist_wheel
+python setup.py sdist
 
 $(dirname $0)/push-pypi-version.sh "${version}" "${repository}"
