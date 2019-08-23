@@ -22,7 +22,12 @@ COPY MANIFEST.in setup.py print_version.sh ./
 
 RUN python setup.py build_ext --inplace
 
-RUN python setup.py sdist
-
 COPY tests ./tests
-COPY .pylintrc ./
+COPY README.md .pylintrc ./
+
+ARG version
+ADD docker ./docker
+RUN ls -l && ./docker/set-version.sh "${version}"
+LABEL org.opencontainers.image.version=${version}
+
+RUN python setup.py sdist bdist_wheel

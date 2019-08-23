@@ -111,3 +111,17 @@ ci-build-and-test:
 
 ci-clean:
 	$(DOCKER_COMPOSE_CI) down -v
+
+
+ci-push-testpypi:
+	$(DOCKER_COMPOSE_CI) run --rm \
+		-v $$PWD/.pypirc:/root/.pypirc \
+		sciencebeam-alignment \
+		./docker/push-testpypi-commit-version.sh "$(COMMIT)"
+
+
+ci-push-pypi:
+	$(DOCKER_COMPOSE_CI) run --rm \
+		-v $$PWD/.pypirc:/root/.pypirc \
+		sciencebeam-alignment \
+		./docker/push-pypi-version.sh "$(VERSION)"

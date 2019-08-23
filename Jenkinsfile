@@ -44,6 +44,13 @@ elifeLibrary {
             }
         }
 
+        elifePullRequestOnly { prNumber ->
+            stage 'Push package to test.pypi.org', {
+                withPypiCredentials 'staging', 'testpypi', {
+                    sh "make IMAGE_TAG=${commit} COMMIT=${commit} NO_BUILD=y ci-push-testpypi"
+                }
+            }
+        }
     }
 
     elifeMainlineOnly {
