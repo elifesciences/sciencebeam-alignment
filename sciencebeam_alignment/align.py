@@ -14,7 +14,7 @@ from six import (
 )
 
 try:
-    from sciencebeam_utils.alignment.align_fast_utils import (  # pylint: disable=E0611
+    from sciencebeam_alignment.align_fast_utils import (
         native_compute_inner_alignment_matrix_simple_scoring_int,
         native_compute_inner_alignment_matrix_simple_scoring_any,
         native_compute_inner_alignment_matrix_scoring_fn_any,
