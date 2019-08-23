@@ -6,4 +6,5 @@ services:
             context: .
             args:
                 install_dev: y
+                version: ${VERSION}
         image: elifesciences/sciencebeam-utils:${IMAGE_TAG}

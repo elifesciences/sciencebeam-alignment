@@ -125,3 +125,7 @@ ci-push-pypi:
 		-v $$PWD/.pypirc:/root/.pypirc \
 		sciencebeam-alignment \
 		./docker/push-pypi-version.sh "$(VERSION)"
+
+
+ci-verify-version:
+	$(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment print_version.sh

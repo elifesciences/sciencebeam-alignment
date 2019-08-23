@@ -36,7 +36,7 @@ elifePipeline {
                 version = 'develop'
             }
             try {
-                sh "make IMAGE_TAG=${commit} REVISION=${commit} ci-build-and-test"
+                sh "make IMAGE_TAG=${commit} REVISION=${commit} VERSION=${version} ci-build-and-test ci-verify-version"
             } finally {
                 sh "make ci-clean"
             }
