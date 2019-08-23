@@ -39,7 +39,7 @@ example match results:
 
 ### GlobalSequenceMatcher and LocalSequenceMatcher
 
-The [GlobalSequenceMatcher and LocalSequenceMatcher](https://github.com/elifesciences/sciencebeam-alignment/blob/develop/sciencebeam_alignment/align.py) implements the [Needleman-Wunsch](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm) [global alignment](https://en.wikipedia.org/wiki/Sequence_alignment#Global_and_local_alignments) as well as the [Smith-Waterman](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm) local alignment algorithms. The implementation is somewhat inspiredby [python-alignment](https://github.com/eseraygun/python-alignment).
+The [GlobalSequenceMatcher and LocalSequenceMatcher](https://github.com/elifesciences/sciencebeam-alignment/blob/develop/sciencebeam_alignment/align.py) implements the [Needleman-Wunsch](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm) [global alignment](https://en.wikipedia.org/wiki/Sequence_alignment#Global_and_local_alignments) as well as the [Smith-Waterman](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm) local alignment algorithms. The implementation is somewhat inspired by [python-alignment](https://github.com/eseraygun/python-alignment).
 
 It does implement `get_matching_blocks` to match Python's [SequenceMatcher](https://docs.python.org/3/library/difflib.html).
 
