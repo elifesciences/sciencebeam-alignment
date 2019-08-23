@@ -18,7 +18,7 @@ NUMPY_REQUIREMENT = [r.rstrip() for r in REQUIRED_PACKAGES if r.startswith('nump
 
 def install_numpy_if_not_available():
     try:
-        import numpy # pylint: disable=unused-variable
+        import numpy # noqa pylint: disable=unused-variable
     except ImportError:
         import subprocess
         print('installing numpy:', NUMPY_REQUIREMENT)

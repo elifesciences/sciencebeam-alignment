@@ -45,11 +45,15 @@ dev-cython-compile:
 dev-venv: venv-create dev-install dev-compile-cython
 
 
+dev-flake8:
+	$(PYTHON) -m flake8 sciencebeam_alignment tests setup.py
+
+
 dev-pylint:
 	$(PYTHON) -m pylint sciencebeam_alignment tests setup.py
 
 
-dev-lint: dev-pylint
+dev-lint: dev-flake8 dev-pylint
 
 
 dev-pytest:
@@ -73,6 +77,10 @@ shell:
 
 shell-dev:
 	$(DEV_RUN) bash
+
+
+flake8:
+	$(DEV_RUN) flake8 sciencebeam_alignment tests setup.py
 
 
 pylint:
@@ -103,7 +111,7 @@ test-setup-install:
 	$(RUN) python setup.py install
 
 
-lint: pylint
+lint: flake8 pylint
 
 
 test: \
