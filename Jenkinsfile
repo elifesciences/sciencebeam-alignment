@@ -9,23 +9,26 @@ elifeLibrary {
     }
 
     node('containers-jenkins-plugin') {
-        stage 'Build images', {
+        stage 'Checkout', {
             checkout scm
-            dockerComposeBuild(commit)
+            commit = elifeGitRevision()
+        }
+
+        stage 'Build and run tests', {
+            try {
+                sh "make IMAGE_TAG=${commit} REVISION=${commit} ci-build-and-test"
+            } finally {
+                sh "make ci-clean"
+            }
+        }
+
+        stage 'Get candidate version', {
             candidateVersion = dockerComposeRunAndCaptureOutput(
                 "sciencebeam-alignment",
                 "./print_version.sh",
                 commit
             ).trim()
             echo "Candidate version: v${candidateVersion}"
-        }
-
-        stage 'Project tests', {
-            dockerComposeRun(
-                "sciencebeam-alignment",
-                "./project_tests.sh",
-                commit
-            )
         }
 
         elifeMainlineOnly {
