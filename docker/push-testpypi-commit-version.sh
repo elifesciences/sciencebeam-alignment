@@ -20,7 +20,7 @@ echo "version=${version}"
 
 $(dirname $0)/set-version.sh "${version}"
 
-cat sciencebeam_utils/__init__.py
+cat sciencebeam_alignment/__init__.py
 
 python setup.py sdist bdist_wheel
 
