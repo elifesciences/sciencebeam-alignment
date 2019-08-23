@@ -9,7 +9,7 @@ from six import (
 
 import numpy as np
 
-from .align import (
+from sciencebeam_alignment.align import (
     LocalSequenceMatcher,
     GlobalSequenceMatcher,
     SimpleScoring,
