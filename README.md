@@ -1,4 +1,4 @@
-# ScienceBeam Utils
+# ScienceBeam Alignment
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -58,7 +58,7 @@ To check whether the fast implementation is enabled:
 
 ```python
 >>> from sciencebeam_alignment.align import native_enabled
->>> print(native_enabled)
+>>> native_enabled
 True
 ```
 
