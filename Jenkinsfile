@@ -21,8 +21,6 @@ def withPypiCredentials(String env, String sectionName, doSomething) {
 
 elifePipeline {
     node('containers-jenkins-plugin') {
-        def isNew
-        def candidateVersion
         def commit
 
         stage 'Checkout', {
@@ -35,28 +33,6 @@ elifePipeline {
                 sh "make IMAGE_TAG=${commit} REVISION=${commit} ci-build-and-test"
             } finally {
                 sh "make ci-clean"
-            }
-        }
-
-        stage 'Get candidate version', {
-            candidateVersion = dockerComposeRunAndCaptureOutput(
-                "sciencebeam-alignment",
-                "./print_version.sh",
-                commit
-            ).trim()
-            echo "Candidate version: v${candidateVersion}"
-        }
-
-        elifeMainlineOnly {
-            stage 'Push release', {
-                isNew = sh(script: "git tag | grep v${candidateVersion}", returnStatus: true) != 0
-                if (isNew) {
-                    dockerComposeRun(
-                        "sciencebeam-alignment",
-                        "twine upload dist/*",
-                        commit
-                    )
-                }
             }
         }
 
