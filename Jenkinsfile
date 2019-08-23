@@ -1,9 +1,9 @@
 elifePipeline {
-    def isNew
-    def candidateVersion
-    def commit
-
     node('containers-jenkins-plugin') {
+        def isNew
+        def candidateVersion
+        def commit
+
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
