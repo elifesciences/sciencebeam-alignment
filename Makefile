@@ -1,5 +1,5 @@
-DOCKER_COMPOSE_DEV = docker-compose
-DOCKER_COMPOSE_CI = docker-compose -f docker-compose.yml
+DOCKER_COMPOSE_DEV = VERSION="$(VERSION)" docker-compose
+DOCKER_COMPOSE_CI = VERSION="$(VERSION)" docker-compose -f docker-compose.yml
 DOCKER_COMPOSE = $(DOCKER_COMPOSE_DEV)
 
 VENV = venv
@@ -128,10 +128,12 @@ ci-push-pypi:
 
 
 ci-verify-version:
-	$(ACTUAL_VERSION = -v $(shell $(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./print_version.sh))
-	@echo "ACTUAL_VERSION: $$ACTUAL_VERSION"
+	$(eval ACTUAL_VERSION = $(shell $(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./print_version.sh))
+	@echo "ACTUAL_VERSION: $(ACTUAL_VERSION)"
 	@echo "EXPECTED_VERSION: $(VERSION)"
-	@if [ "$$ACTUAL_VERSION" != "$(VERSION)" ]; then \
+	@if [ "$(ACTUAL_VERSION)" != "$(VERSION)" ]; then \
 		echo "Version mismatches: $$ACTUAL_VERSION != $(VERSION)"; \
 		exit 2; \
+	else \
+		echo "Version maches"; \
 	fi
