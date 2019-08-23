@@ -39,9 +39,6 @@ elifePipeline {
         elifeMainlineOnly {
             stage 'Merge to master', {
                 elifeGitMoveToBranch commit, 'master'
-                if (isNew) {
-                    sh "git tag v${candidateVersion} && git push origin v${candidateVersion}"
-                }
             }
         }
 
