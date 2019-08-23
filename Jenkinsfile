@@ -1,12 +1,7 @@
-elifeLibrary {
+elifePipeline {
     def isNew
     def candidateVersion
     def commit
-
-    stage 'Checkout', {
-        checkout scm
-        commit = elifeGitRevision()
-    }
 
     node('containers-jenkins-plugin') {
         stage 'Checkout', {
@@ -44,20 +39,20 @@ elifeLibrary {
             }
         }
 
+        elifeMainlineOnly {
+            stage 'Merge to master', {
+                elifeGitMoveToBranch commit, 'master'
+                if (isNew) {
+                    sh "git tag v${candidateVersion} && git push origin v${candidateVersion}"
+                }
+            }
+        }
+
         elifePullRequestOnly { prNumber ->
             stage 'Push package to test.pypi.org', {
                 withPypiCredentials 'staging', 'testpypi', {
                     sh "make IMAGE_TAG=${commit} COMMIT=${commit} NO_BUILD=y ci-push-testpypi"
                 }
-            }
-        }
-    }
-
-    elifeMainlineOnly {
-        stage 'Merge to master', {
-            elifeGitMoveToBranch commit, 'master'
-            if (isNew) {
-                sh "git tag v${candidateVersion} && git push origin v${candidateVersion}"
             }
         }
     }
