@@ -15,7 +15,7 @@ COPY requirements.dev.txt ./
 RUN if [ "${install_dev}" = "y" ]; then pip install -r requirements.dev.txt; fi
 
 COPY sciencebeam_alignment ./sciencebeam_alignment
-COPY MANIFEST.in setup.py .pylintrc ./
+COPY MANIFEST.in setup.py print_version.sh ./
 
 RUN python setup.py build_ext --inplace
 
