@@ -8,6 +8,11 @@ import sciencebeam_alignment
 with open('requirements.txt', 'r') as f:
     REQUIRED_PACKAGES = f.readlines()
 
+
+with open('README.md', 'r') as f:
+    long_description = f.read()
+
+
 NUMPY_REQUIREMENT = [r.rstrip() for r in REQUIRED_PACKAGES if r.startswith('numpy')][0]
 
 
@@ -48,5 +53,7 @@ setup(
             sources=['sciencebeam_alignment/align_fast_utils.pyx']
         ),
     ],
-    include_dirs=[get_numpy_include_dir()]
+    include_dirs=[get_numpy_include_dir()],
+    long_description=long_description,
+    long_description_content_type='text/markdown'
 )

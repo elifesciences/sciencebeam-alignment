@@ -1,5 +1,5 @@
-DOCKER_COMPOSE_DEV = docker-compose
-DOCKER_COMPOSE_CI = docker-compose -f docker-compose.yml
+DOCKER_COMPOSE_DEV = VERSION="$(VERSION)" docker-compose
+DOCKER_COMPOSE_CI = VERSION="$(VERSION)" docker-compose -f docker-compose.yml
 DOCKER_COMPOSE = $(DOCKER_COMPOSE_DEV)
 
 VENV = venv
@@ -111,3 +111,21 @@ ci-build-and-test:
 
 ci-clean:
 	$(DOCKER_COMPOSE_CI) down -v
+
+
+ci-push-testpypi:
+	$(DOCKER_COMPOSE_CI) run --rm \
+		-v $$PWD/.pypirc:/root/.pypirc \
+		sciencebeam-alignment \
+		./docker/push-testpypi-commit-version.sh "$(COMMIT)"
+
+
+ci-push-pypi:
+	$(DOCKER_COMPOSE_CI) run --rm \
+		-v $$PWD/.pypirc:/root/.pypirc \
+		sciencebeam-alignment \
+		./docker/push-pypi-version.sh "$(VERSION)"
+
+
+ci-verify-version:
+	$(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./docker/verify-version.sh "$(VERSION)"
