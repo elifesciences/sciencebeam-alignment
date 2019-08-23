@@ -128,8 +128,8 @@ ci-push-pypi:
 
 
 ci-verify-version:
-	$(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./print_version.sh
-	$(eval ACTUAL_VERSION = $(shell $(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./print_version.sh))
+	$(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./docker/print-version.sh
+	$(eval ACTUAL_VERSION = $(shell $(DOCKER_COMPOSE_CI) run --rm sciencebeam-alignment ./docker/print-version.sh))
 	@echo "ACTUAL_VERSION: $(ACTUAL_VERSION)"
 	@echo "EXPECTED_VERSION: $(VERSION)"
 	@if [ "$(ACTUAL_VERSION)" != "$(VERSION)" ]; then \
