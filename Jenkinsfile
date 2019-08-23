@@ -22,6 +22,7 @@ def withPypiCredentials(String env, String sectionName, doSomething) {
 elifePipeline {
     node('containers-jenkins-plugin') {
         def commit
+        def version
 
         stage 'Checkout', {
             checkout scm
@@ -29,6 +30,11 @@ elifePipeline {
         }
 
         stage 'Build and run tests', {
+            if (env.TAG_NAME) {
+                version = env.TAG_NAME - 'v'
+            } else {
+                version = 'develop'
+            }
             try {
                 sh "make IMAGE_TAG=${commit} REVISION=${commit} ci-build-and-test"
             } finally {
