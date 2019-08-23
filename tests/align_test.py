@@ -14,7 +14,8 @@ from sciencebeam_alignment.align import (
     GlobalSequenceMatcher,
     SimpleScoring,
     CustomScoring,
-    require_native
+    require_native,
+    native_enabled
 )
 
 DEFAULT_SCORING = SimpleScoring(
@@ -33,6 +34,10 @@ DEFAULT_CUSTOM_SCORING = CustomScoring(
 
 def _non_zero(matching_blocks):
     return [(ai, bi, size) for ai, bi, size in matching_blocks if size]
+
+
+def test_should_use_native_implementation_by_default():
+    assert native_enabled
 
 
 class CharWrapper(object):

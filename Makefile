@@ -34,7 +34,15 @@ dev-install:
 	$(PIP) install -e . --no-deps
 
 
-dev-venv: venv-create dev-install
+dev-cython-clean:
+	rm -f sciencebeam_alignment/align_fast_utils.c sciencebeam_alignment/align_fast_utils.so
+
+
+dev-cython-compile:
+	$(PYTHON) setup.py build_ext --inplace
+
+
+dev-venv: venv-create dev-install dev-compile-cython
 
 
 dev-pylint:
