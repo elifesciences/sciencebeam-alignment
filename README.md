@@ -4,7 +4,7 @@
 
 ScienceBeam Alignment provides generic low-level sequence alignment utility functions, similar to Python's [SequenceMatcher](https://docs.python.org/3/library/difflib.html).
 
-This project is currently mainly used for training data generation, related to [ScienceBeam project](https://github.com/elifesciences/sciencebeam). Although this project itself has no ScienceBeam dependency and can be considered a standalone sequence alignment library. It is however more targeted at document size sequences rather than massive gene sequences.
+This project is currently mainly used for training data generation, related to the [ScienceBeam project](https://github.com/elifesciences/sciencebeam). Although this project itself has no ScienceBeam dependency and can be considered a standalone sequence alignment library. It is however more targeted at document size sequences rather than massive gene sequences.
 
 ## Pre-requisites
 
