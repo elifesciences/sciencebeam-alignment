@@ -42,6 +42,9 @@ setup(
     packages=packages,
     include_package_data=True,
     description='ScienceBeam Alignment',
+    url='https://github.com/elifesciences/sciencebeam-alignment',
+    license='MIT',
+    keywords="sequence alignment",
     setup_requires=[
         # Setuptools 18.0 properly handles Cython extensions.
         'setuptools>=18.0',
