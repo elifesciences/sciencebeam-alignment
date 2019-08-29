@@ -68,7 +68,7 @@ In addition, the `get_multiple_matching_blocks` can be used to retrieve multiple
 
 `get_multiple_matching_blocks` returns a generator. The number of variations can be limited using the `limit` argument or by simply stopping early.
 
-The `GlobalSequenceMatcher` can then also be used to calculate the [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) (or _edit distance_). An example is provided in `sciencebeam_alignment.levenshtein`:
+The `GlobalSequenceMatcher` can also be used to calculate the [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance) (or _edit distance_). An example is provided in `sciencebeam_alignment.levenshtein`:
 
 ```python
 >>> from sciencebeam_alignment.levenshtein import get_levenshtein_distance
