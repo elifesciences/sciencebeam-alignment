@@ -17,7 +17,7 @@ def get_levenshtein_distance(a, b):
     )
 
 
-def get_levenshtein_score(a, b):
+def get_levenshtein_ratio(a, b):
     max_length = max(len(a), len(b))
     if not max_length:
         return 0.0

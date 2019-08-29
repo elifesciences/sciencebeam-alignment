@@ -1,7 +1,4 @@
-from sciencebeam_alignment.levenshtein import (
-    get_levenshtein_distance,
-    get_levenshtein_score
-)
+from sciencebeam_alignment.levenshtein import get_levenshtein_distance, get_levenshtein_ratio
 
 
 class TestGetLevenshteinDistance(object):
@@ -21,15 +18,15 @@ class TestGetLevenshteinDistance(object):
         assert get_levenshtein_distance('kitten', 'sitting') == 3
 
 
-class TestGetLevenshteinScore(object):
+class TestGetLevenshteinRatio(object):
     def test_should_return_zero_for_two_empty_sequences(self):
-        assert get_levenshtein_score('', '') == 0.0
+        assert get_levenshtein_ratio('', '') == 0.0
 
     def test_should_return_one_for_two_equal_sequences(self):
-        assert get_levenshtein_score('abc', 'abc') == 1.0
+        assert get_levenshtein_ratio('abc', 'abc') == 1.0
 
     def test_should_return_point_five_for_half_substitution(self):
-        assert get_levenshtein_score('abcd', 'axxd') == 0.5
+        assert get_levenshtein_ratio('abcd', 'axxd') == 0.5
 
     def test_should_return_point_five_for_half_deletion(self):
-        assert get_levenshtein_score('abcd', 'ad') == 0.5
+        assert get_levenshtein_ratio('abcd', 'ad') == 0.5

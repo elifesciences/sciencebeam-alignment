@@ -74,8 +74,8 @@ The `GlobalSequenceMatcher` can then also be used to calculate the [Levenshtein 
 >>> from sciencebeam_alignment.levenshtein import get_levenshtein_distance
 >>> get_levenshtein_distance('kitten', 'sitting')
 3
->>> from sciencebeam_alignment.levenshtein import get_levenshtein_score
->>> get_levenshtein_score('kitten', 'sitting')
+>>> from sciencebeam_alignment.levenshtein import get_levenshtein_ratio
+>>> get_levenshtein_ratio('kitten', 'sitting')
 0.5714285714285714
 ```
 
