@@ -42,7 +42,7 @@ dev-cython-compile:
 	$(PYTHON) setup.py build_ext --inplace
 
 
-dev-venv: venv-create dev-install dev-compile-cython
+dev-venv: venv-create dev-install dev-cython-compile
 
 
 dev-flake8:
