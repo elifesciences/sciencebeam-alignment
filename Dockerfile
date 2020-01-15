@@ -1,10 +1,10 @@
-FROM python:2.7.14-stretch
+FROM python:3.7.6-buster
 
 ENV PROJECT_HOME=/srv/sciencebeam-alignment
 WORKDIR ${PROJECT_HOME}
 
 ENV VENV=${PROJECT_HOME}/venv
-RUN virtualenv ${VENV}}
+RUN python3 -m venv ${VENV}}
 ENV PYTHONUSERBASE=${VENV} PATH=${VENV}/bin:$PATH
 
 COPY requirements.build.txt ./
