@@ -1,4 +1,4 @@
-FROM python:3.7.6-buster
+FROM python:3.8.1-buster
 
 ENV PROJECT_HOME=/srv/sciencebeam-alignment
 WORKDIR ${PROJECT_HOME}
