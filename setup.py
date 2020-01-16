@@ -1,3 +1,4 @@
+# pylint: disable=import-outside-toplevel
 from __future__ import print_function
 
 import sys
@@ -19,7 +20,7 @@ NUMPY_REQUIREMENT = [r.rstrip() for r in REQUIRED_PACKAGES if r.startswith('nump
 
 def is_numpy_installed():
     try:
-        import numpy # noqa pylint: disable=unused-variable
+        import numpy # noqa pylint: disable=unused-variable, unused-import
         return True
     except ImportError:
         return False
